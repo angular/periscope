@@ -15,7 +15,7 @@ import {Subscriber} from 'rxjs/Subscriber';
 
 import {Event, Issue, LabelRef, PullRequest} from './v3';
 
-import {AngularFire, FirebaseObjectObservable, FirebaseAuth} from 'angularfire2';
+import {AngularFire, FirebaseObjectObservable, FirebaseAuth, FirebaseAuthState} from 'angularfire2';
 
 const EVENTS = '/github_webhook_events';
 const EVENTS_LEASE = '/github_webhook_events_lease';
@@ -172,7 +172,7 @@ export class GithubStore {
   }
 
   private _get(path: string, params: {[k: string]: any} = {}): Observable<Response> {
-    var authState: FirebaseAuthData = this.af.auth.getAuth();
+    var authState: FirebaseAuthState = this.af.auth.getAuth();
     var accessToken: string = (<any>authState).github.accessToken;
     var qParams: string[] = [];
     Object.keys(params).forEach((key) => qParams.push(key + '=' + params[key]));

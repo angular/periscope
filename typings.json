@@ -2,10 +2,12 @@
   "ambientDevDependencies": {
     "angular-protractor": "registry:dt/angular-protractor#1.5.0+20160425143459",
     "jasmine": "registry:dt/jasmine#2.2.0+20160412134438",
-    "selenium-webdriver": "registry:dt/selenium-webdriver#2.44.0+20160317120654",
-    "firebase": "github:DefinitelyTyped/DefinitelyTyped/firebase/firebase.d.ts#56295f5058cac7ae458540423c50ac2dcf9fc711"
+    "selenium-webdriver": "registry:dt/selenium-webdriver#2.44.0+20160317120654"
   },
   "ambientDependencies": {
     "es6-shim": "registry:dt/es6-shim#0.31.2+20160317120654"
+  },
+  "globalDependencies": {
+    "firebase3": "file:node_modules/angularfire2/firebase3.d.ts"
   }
 }

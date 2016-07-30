@@ -4,7 +4,7 @@
     "name": "periscope"
   },
   "apps": [
-    {"main": "src/main.ts", "tsconfig": "src/tsconfig.json"}
+    {"main": "src/main-static.ts", "tsconfig": "src/tsconfig.json"}
   ],
   "addons": [],
   "packages": [],

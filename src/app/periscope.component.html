@@ -24,7 +24,8 @@
         <!--i18n-->auth<!--/i18n-->
       </button>
       <button md-button>
-        <img src="https://avatars3.githubusercontent.com/u/{{authState?.github?.id}}?s=32"
+        <img *ngIf="authState?.auth?.photoURL"
+             src="{{authState?.auth?.photoURL}}&s=32"
              style="vertical-align: middle;">
       </button>
       <button md-button href (click)="logout()" *ngIf="authState">

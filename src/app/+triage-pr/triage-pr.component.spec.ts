@@ -1,5 +1,5 @@
-import {beforeEach, beforeEachProviders, describe, expect, it, inject,} from '@angular/core/testing';
-import {ComponentFixture, TestComponentBuilder} from '@angular/compiler/testing';
+import {inject} from '@angular/core/testing';
+import {ComponentFixture, TestComponentBuilder} from '@angular/core/testing';
 import {Component} from '@angular/core';
 import {By} from '@angular/platform-browser';
 import {TriagePrComponent} from './triage-pr.component';
@@ -7,7 +7,6 @@ import {TriagePrComponent} from './triage-pr.component';
 describe('Component: TriagePr', () => {
   let builder: TestComponentBuilder;
 
-  beforeEachProviders(() => [TriagePrComponent]);
   beforeEach(
       inject([TestComponentBuilder], function(tcb: TestComponentBuilder) { builder = tcb; }));
 

@@ -12,15 +12,13 @@
     "rootDir": ".",
     "sourceMap": true,
     "target": "es5",
-    "inlineSources": true
+    "inlineSources": true,
+    "skipLibCheck": true
   },
 
   "files": [
+    "../node_modules/angularfire2/firebase3.d.ts",
     "main.ts",
     "typings.d.ts"
-  ],
-
-  "angularCompilerOptions": {
-    "genDir": "."
-  }
+  ]
 }
