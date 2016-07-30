@@ -32,7 +32,7 @@ const materialPkgs:string[] = [
 ];
 
 materialPkgs.forEach((pkg) => {
-  packages[`@angular2-material/${pkg}`] = {main: `${pkg}.js`};
+  packages[`@angular2-material/${pkg}`] = {main: `${pkg}.js`, defaultExtension: 'js'};
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -61,9 +61,10 @@ declare var System: any;
 // Apply the CLI SystemJS configuration.
 System.config({
   map: {
-    '@angular': 'vendor/@angular', 
-    'rxjs': 'vendor/rxjs', 
-    'main': 'main.js'
+    '@angular': 'vendor/@angular',
+    'rxjs': 'vendor/rxjs',
+    'main': 'main.js',
+    'main-static': 'main-static.js'
   },
   packages: cliSystemConfigPackages
 });
