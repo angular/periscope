@@ -5,7 +5,6 @@ import {Digest, GithubStore} from '../github/store';
 import {Event} from '../github/v3';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-sync',
   templateUrl: 'sync.component.html',
   styleUrls: ['sync.component.css'],

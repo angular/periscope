@@ -14,7 +14,13 @@
     "target": "es5",
     "skipLibCheck": true,
     "lib": ["es2015", "dom"],
-    "inlineSources": true
+    "inlineSources": true,
+    "types": [
+      "node"
+    ],
+    "typeRoots": [
+      "./node_modules/@types"
+    ]
   },
 
   "files": [
@@ -28,4 +34,3 @@
     "genDir": "./ngfactory"
   }
 }
-

@@ -2,10 +2,9 @@ import {Component} from '@angular/core';
 import {PrBoardService, Staleness} from '../pr-board.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-triage-pr',
-  templateUrl: 'triage-pr.component.html',
-  styleUrls: ['triage-pr.component.css']
+  templateUrl: './triage-pr.component.html',
+  styleUrls: ['./triage-pr.component.css']
 })
 export class TriagePrComponent {
   constructor(public state: PrBoardService) {}

@@ -19,6 +19,7 @@
     "@angular/core": "github:angular/core-builds",
     "@angular/forms": "github:angular/forms-builds",
     "@angular/http": "github:angular/http-builds",
+    "@angular/material": "^2.0.0-alpha.9-3",
     "@angular/platform-browser": "github:angular/platform-browser-builds",
     "@angular/platform-browser-dynamic": "github:angular/platform-browser-dynamic-builds",
     "@angular/platform-server": "github:angular/platform-server-builds",
@@ -47,7 +48,9 @@
     "zone.js": "^0.6.12"
   },
   "devDependencies": {
+    "@types/node": "^6.0.45",
     "angular-cli": "^1.0.0-beta.5",
+    "awesome-typescript-loader": "^2.2.4",
     "clang-format": "^1.0.35",
     "codelyzer": "0.0.14",
     "ember-cli-inject-live-reload": "^1.4.0",

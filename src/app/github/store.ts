@@ -4,18 +4,18 @@ import 'rxjs/add/operator/partition';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/repeat';
 import 'rxjs/add/operator/retryWhen';
 import 'rxjs/add/observable/timer';
 
 import {Injectable} from '@angular/core';
 import {Headers, Http, Response} from '@angular/http';
+import {AngularFire, FirebaseAuth, FirebaseAuthState, FirebaseObjectObservable} from 'angularfire2';
 import {Observable} from 'rxjs/Observable';
 import {Subscriber} from 'rxjs/Subscriber';
 
 import {Event, Issue, LabelRef, PullRequest} from './v3';
-
-import {AngularFire, FirebaseObjectObservable, FirebaseAuth, FirebaseAuthState} from 'angularfire2';
 
 const EVENTS = '/github_webhook_events';
 const EVENTS_LEASE = '/github_webhook_events_lease';
@@ -99,16 +99,17 @@ export class GithubStore {
                  },
                  (error: any, committed: boolean, expirationTimeRef: any) => {
                    if (error) {
-                     console.error(error); 
+                     console.error(error);
                    } else {
                      var duration = expirationTimeRef.val() - now;
                      subscriber.next({isMaster: committed, duration: duration});
                      if (committed) {
                        lastLease = expirationTimeRef.val();
-                       id = setTimeout(() => subscriber.complete(), duration - LEASE_TIME * .1);
+                       id = window.setTimeout(
+                           () => subscriber.complete(), duration - LEASE_TIME * .1);
                      } else {
                        lastLease = -1;
-                       id = setTimeout(() => subscriber.complete(), duration);
+                       id = window.setTimeout(() => subscriber.complete(), duration);
                      }
                    }
                  });
@@ -122,16 +123,22 @@ export class GithubStore {
         .share();
   }
 
-  updatePr(prNumber: number): void { this._update(PR_EXTRACTOR, prNumber); }
+  updatePr(prNumber: number): void {
+    this._update(PR_EXTRACTOR, prNumber);
+  }
 
-  updatePrs() { this._updateAll(PR_EXTRACTOR); }
+  updatePrs() {
+    this._updateAll(PR_EXTRACTOR);
+  }
 
   private _updateAll(extractor: Extractor): void {
     var fetchPage = (page: number) => {
       this._get(extractor.githubUrl, {page: page, state: 'all'})
           .subscribe((prsResponse: Response) => {
             var prs: PullRequest[] = prsResponse.json();
-            prs.forEach((pr: PullRequest) => { this._updateObject(extractor, pr); });
+            prs.forEach((pr: PullRequest) => {
+              this._updateObject(extractor, pr);
+            });
             if (prs.length) fetchPage(page + 1);
           });
     };
@@ -172,13 +179,22 @@ export class GithubStore {
   }
 
   private _get(path: string, params: {[k: string]: any} = {}): Observable<Response> {
-    var authState: FirebaseAuthState = this.af.auth.getAuth();
-    var accessToken: string = (<any>authState).github.accessToken;
-    var qParams: string[] = [];
-    Object.keys(params).forEach((key) => qParams.push(key + '=' + params[key]));
-    return this.http.get(
-        'https://api.github.com/repos/angular/angular' + path + '?' + qParams.join('&'),
-        {headers: new Headers({'Authorization': 'token ' + accessToken})});
+    return new Observable(observer => {
+      this.af.auth.subscribe((authState: FirebaseAuthState) => {
+        console.log(authState);
+
+        var accessToken: string = authState.github.accessToken;
+        var qParams: string[] = [];
+        Object.keys(params).forEach((key) => qParams.push(key + '=' + params[key]));
+        this.http
+            .get(
+                'https://api.github.com/repos/angular/angular' + path + '?' + qParams.join('&'),
+                {headers: new Headers({'Authorization': 'token ' + accessToken})})
+            .subscribe((prsResponse: Response) => {
+              observer.next(prsResponse);
+            });
+      });
+    });
   }
 }
 

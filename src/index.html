@@ -11,16 +11,6 @@
 </head>
 <body>
   <periscope-app>Loading...</periscope-app>
-
-  <script src="vendor/es6-shim/es6-shim.js"></script>
-  <script src="vendor/reflect-metadata/Reflect.js"></script>
-  <script src="vendor/systemjs/dist/system.src.js"></script>
-  <script src="vendor/zone.js/dist/zone.js"></script>
-
-  <script>
-    System.import('system-config.js').then(function () {
-      System.import('main-static');
-    }).catch(console.error.bind(console));
-  </script>
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 </body>
 </html>

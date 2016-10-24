@@ -5,7 +5,6 @@ import {GithubStore} from './github/store';
 import {PrBoardService} from './pr-board.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'periscope-app',
   templateUrl: 'periscope.component.html',
   styleUrls: ['periscope.component.css'],
